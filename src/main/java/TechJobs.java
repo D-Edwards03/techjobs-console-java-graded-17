@@ -61,9 +61,15 @@ public class TechJobs {
                 System.out.println("\nSearch term:");
                 String searchTerm = in.nextLine();
 
+                /* Checks if the searchField variable is equal to the string "all"
+                Indicates that the user wants to search across all columns */
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not implemented yet.");
+                    /* If searchField is all then the findByValue method is called from the JobData class
+                    passing the searchTerm as an argument */
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
+                    /* If searchField is not all then the findByColumnAndValue is called from the JobData
+                    class passing the searchField and searchTerm as arguments */
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
             }
@@ -119,14 +125,18 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        //Checks to see if someJobs list is empty
         if (someJobs.isEmpty()) {
             System.out.println("No Results");
             return;
         }
 
+        //Loop that iterates over each HashMap (job) in the someJobs list
         for (HashMap<String, String> job : someJobs) {
             System.out.println("*****");
+            //Nested loop that iterates over each key-value pair (entry) in the current HashMap (job)
             for (Map.Entry<String, String> element : job.entrySet()) {
+                //Prints the key and value of the current entry
                 System.out.println(element.getKey() + ": " + element.getValue());
             }
             System.out.println("*****\n");

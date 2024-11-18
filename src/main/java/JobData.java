@@ -94,8 +94,29 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        // Initializes a new ArrayList named jobs that stores HashMap objects
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        // Starts a loop that iterates over each HashMap in the allJobs list
+        for (HashMap<String, String> job : allJobs) {
+            // Nested loop that iterates over each key in the current job's HashMap
+            for (String key : job.keySet()) {
+                // Retrieves the value associated with the current key and converts it to lowercase
+                String jobValue = job.get(key).toLowerCase();
+                // Checks if the job's value contains the search term
+                if (jobValue.contains(value.toLowerCase())) {
+                    // Checks if the job is not already in the jobs list
+                    if (!jobs.contains(job)) {
+                        // Adds the job to the jobs list if it matches and is not already in the list
+                        jobs.add(job);
+                    }
+                    break;
+                }
+            }
+        }
+
         // TODO - implement this method
-        return null;
+        return jobs;
     }
 
     /**
